@@ -40,7 +40,7 @@ class AI:
             model=self.model,
             temperature=self.temperature,
         )
-
+        logger.debug(f"Creating a new chat completion: {messages}")
         chat = []
         for chunk in response:
             delta = chunk["choices"][0]["delta"]
@@ -48,6 +48,7 @@ class AI:
             print(msg, end="")
             chat.append(msg)
         print()
+        logger.info(f"Creating a new chat completion: {messages}")
         messages += [{"role": "assistant", "content": "".join(chat)}]
         logger.debug(f"Chat completion finished: {messages}")
         return messages
